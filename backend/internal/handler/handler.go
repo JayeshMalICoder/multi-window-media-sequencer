@@ -39,14 +39,36 @@ func (h *Handler) Windows(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) Window(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "POST is required"})
+	path := strings.TrimPrefix(r.URL.Path, "/api/windows/")
+	parts := strings.Split(strings.Trim(path, "/"), "/")
+	if len(parts) == 0 || parts[0] == "" {
+		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid window id"})
 		return
 	}
 
-	id := strings.TrimPrefix(r.URL.Path, "/api/windows/")
-	if id == "" || strings.Contains(id, "/") {
-		writeJSON(w, http.StatusBadRequest, map[string]string{"error": "invalid window id"})
+	windowID := parts[0]
+
+	if r.Method == http.MethodDelete {
+		if len(parts) != 3 || parts[1] != "media" || parts[2] == "" {
+			writeJSON(w, http.StatusBadRequest, map[string]string{"error": "use DELETE /api/windows/{windowId}/media/{mediaId}"})
+			return
+		}
+
+		window, err := h.playlist.RemoveMedia(windowID, parts[2])
+		if err != nil {
+			status := http.StatusBadRequest
+			if errors.Is(err, repository.ErrWindowNotFound) || errors.Is(err, repository.ErrMediaNotFound) {
+				status = http.StatusNotFound
+			}
+			writeJSON(w, status, map[string]string{"error": err.Error()})
+			return
+		}
+		writeJSON(w, http.StatusOK, window)
+		return
+	}
+
+	if r.Method != http.MethodPost || len(parts) != 1 {
+		writeJSON(w, http.StatusMethodNotAllowed, map[string]string{"error": "POST is required for adding media"})
 		return
 	}
 
@@ -56,7 +78,7 @@ func (h *Handler) Window(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	window, err := h.playlist.AddMedia(id, media)
+	window, err := h.playlist.AddMedia(windowID, media)
 	if err != nil {
 		status := http.StatusBadRequest
 		if errors.Is(err, repository.ErrWindowNotFound) {

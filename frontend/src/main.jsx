@@ -116,6 +116,22 @@ function App() {
     setWindows((items) => items.map((w) => w.id === data.id ? data : w));
   }
 
+  async function deleteMedia(windowId, mediaId) {
+    const media = windows.find((w) => w.id === windowId)?.playlist.find((m) => m.id === mediaId);
+    if (!media) return;
+
+    if (!window.confirm(`Delete "${media.name}" from this display window?`)) return;
+
+    const response = await fetch(`${API}/api/windows/${windowId}/media/${encodeURIComponent(mediaId)}`, {
+      method: "DELETE"
+    });
+    const data = await response.json();
+    if (!response.ok) return alert(data.error || "Unable to delete media");
+
+    setWindows((items) => items.map((w) => w.id === data.id ? data : w));
+    if (selected === mediaId) setSelected("");
+  }
+
   async function syncMedia() {
     const media = windows.flatMap((w) => w.playlist).find((m) => m.id === selected);
     if (!media) return;
@@ -135,6 +151,7 @@ function App() {
     <main>
       <header>
         <div>
+          <small>BACKEND INTERN ASSIGNMENT</small>
           <h1>Multi-Window Media Sequencer</h1>
           <p>Scalable layered backend · React display layer · real-time synchronized playback</p>
         </div>
@@ -184,9 +201,18 @@ function App() {
             <div className="list" key={w.id}>
               <div className="list-head"><b>{w.name}</b><span>{w.playlist.length} items</span></div>
               {w.playlist.map((m, i) => (
-                <button className="media" key={`${m.id}-${i}`} onClick={() => setSelected(m.id)}>
-                  <span>{i+1}</span><b>{m.id} · {m.name}</b><small>{m.type} · {durationOf(m)} sec</small>
-                </button>
+                <div className="media" key={`${m.id}-${i}`}>
+                  <button className="media-info" onClick={() => setSelected(m.id)}>
+                    <span>{i+1}</span><b>{m.id} · {m.name}</b><small>{m.type} · {durationOf(m)} sec</small>
+                  </button>
+                  <button
+                    className="delete-media"
+                    title={`Delete ${m.name}`}
+                    onClick={() => deleteMedia(w.id, m.id)}
+                  >
+                    Delete
+                  </button>
+                </div>
               ))}
             </div>
           ))}

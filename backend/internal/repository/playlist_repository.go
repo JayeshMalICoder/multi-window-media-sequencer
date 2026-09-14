@@ -6,7 +6,10 @@ import (
 	"media-sequencer/backend/internal/model"
 )
 
-var ErrWindowNotFound = errors.New("window not found")
+var (
+	ErrWindowNotFound = errors.New("window not found")
+	ErrMediaNotFound  = errors.New("media not found")
+)
 
 // PlaylistRepository describes what the service needs from persistence.
 // The service does not know whether the implementation is JSON, PostgreSQL,
@@ -14,4 +17,5 @@ var ErrWindowNotFound = errors.New("window not found")
 type PlaylistRepository interface {
 	GetAll() ([]model.DisplayWindow, error)
 	AppendMedia(windowID string, media model.MediaItem) (model.DisplayWindow, error)
+	RemoveMedia(windowID string, mediaID string) (model.DisplayWindow, error)
 }

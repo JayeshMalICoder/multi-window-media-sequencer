@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	ErrInvalidMedia = errors.New("invalid media")
+	ErrInvalidMedia  = errors.New("invalid media")
 	ErrInvalidWindow = errors.New("invalid window")
 )
 
@@ -50,6 +50,25 @@ func (s *PlaylistService) AddMedia(windowID string, media model.MediaItem) (mode
 	}
 
 	updated, err := s.repo.AppendMedia(windowID, media)
+	if err != nil {
+		return model.DisplayWindow{}, err
+	}
+
+	s.sync.PublishPlaylist(updated)
+	return updated, nil
+}
+
+func (s *PlaylistService) RemoveMedia(windowID string, mediaID string) (model.DisplayWindow, error) {
+	windowID = strings.TrimSpace(windowID)
+	mediaID = strings.TrimSpace(mediaID)
+	if windowID == "" {
+		return model.DisplayWindow{}, ErrInvalidWindow
+	}
+	if mediaID == "" {
+		return model.DisplayWindow{}, ErrInvalidMedia
+	}
+
+	updated, err := s.repo.RemoveMedia(windowID, mediaID)
 	if err != nil {
 		return model.DisplayWindow{}, err
 	}

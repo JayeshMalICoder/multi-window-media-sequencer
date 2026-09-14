@@ -74,6 +74,31 @@ func (r *JSONPlaylistRepository) AppendMedia(windowID string, media model.MediaI
 	return model.DisplayWindow{}, ErrWindowNotFound
 }
 
+func (r *JSONPlaylistRepository) RemoveMedia(windowID string, mediaID string) (model.DisplayWindow, error) {
+	r.mu.Lock()
+	defer r.mu.Unlock()
+
+	for i := range r.windows {
+		if r.windows[i].ID != windowID {
+			continue
+		}
+
+		for j := range r.windows[i].Playlist {
+			if r.windows[i].Playlist[j].ID == mediaID {
+				r.windows[i].Playlist = append(r.windows[i].Playlist[:j], r.windows[i].Playlist[j+1:]...)
+				r.windows[i].UpdatedAt = time.Now().UTC()
+
+				if err := r.saveLocked(); err != nil {
+					return model.DisplayWindow{}, err
+				}
+				return r.windows[i], nil
+			}
+		}
+		return model.DisplayWindow{}, ErrMediaNotFound
+	}
+	return model.DisplayWindow{}, ErrWindowNotFound
+}
+
 func (r *JSONPlaylistRepository) saveLocked() error {
 	if err := os.MkdirAll(filepath.Dir(r.filePath), 0755); err != nil {
 		return err
