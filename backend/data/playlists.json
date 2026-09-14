@@ -1,0 +1,104 @@
+[
+  {
+    "id": "window-1",
+    "name": "Display Window 1",
+    "playlist": [
+      {
+        "id": "M1",
+        "name": "Mountain",
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
+        "duration": 8
+      },
+      {
+        "id": "M2",
+        "name": "Ocean",
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
+        "duration": 8
+      },
+      {
+        "id": "M3",
+        "name": "Sample Video",
+        "type": "video",
+        "url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+        "duration": 12
+      },
+      {
+        "id": "M7",
+        "name": "New Media",
+        "type": "image",
+        "duration": 10
+      },
+      {
+        "id": "M7",
+        "name": "New Media",
+        "type": "image",
+        "duration": 10
+      },
+      {
+        "id": "M7",
+        "name": "New Media",
+        "type": "image",
+        "url": "https://www.google.com/search?sca_esv=2d0686cf1d3721e9\u0026sxsrf=APpeQnsNHNi-UgaKVL82vIwhm_1te6HiZw:1789362379278\u0026udm=2\u0026fbs=ABfTbFVyMZGZf1hfvX9uKjN_-G8c4u0nXx4bEIpwm1lnNH832cSpkWkfSwsmpNIrD_OQ-UdFAe4qAwsQWVbrtprjzBSpTP2pSHBuP2iAv5_W37Av-jVGmceWkQMlPDoZbq9qt1OA8ECMl7cy7Wi9cD1Bn_bf09lCJlW_A39Jm-pSZtI49Ywj3oD_DDR2v0ElloVdaXImrwzmiYlc4wrslgQsMNV8nr2gFg\u0026q=photo\u0026sa=X\u0026ved=2ahUKEwj40_anpu2WAxWRk-EIHbUQKUgQtKgLegQIFhAB\u0026biw=1280\u0026bih=665\u0026dpr=1.5#sv=CAMSURoyKhBlLVJFbGFTdjRyd3RBai1NMg5SRWxhU3Y0cnd0QWotTToOcVBKRXJQZHUxbWZNVk0gBCoXCgFzEhBlLVJFbGFTdjRyd3RBai1NGAEwARgHILjZjegHSggQARgBIAEoAQ",
+        "duration": 5
+      }
+    ],
+    "updatedAt": "2026-09-14T05:06:35.348629Z"
+  },
+  {
+    "id": "window-2",
+    "name": "Display Window 2",
+    "playlist": [
+      {
+        "id": "M4",
+        "name": "City",
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
+        "duration": 7
+      },
+      {
+        "id": "M2",
+        "name": "Ocean",
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
+        "duration": 8
+      },
+      {
+        "id": "M5",
+        "name": "Blank",
+        "type": "blank",
+        "duration": 5
+      },
+      {
+        "id": "M7",
+        "name": "Raj ka photo",
+        "type": "image",
+        "url": "https://unsplash.com/photos/selective-focus-of-woman-behind-pink-flowers-holding-red-samsung-bridge-camera-about-to-take-photo-of-flower-o2DVsV2PnHE",
+        "duration": 5
+      }
+    ],
+    "updatedAt": "2026-09-14T05:07:40.4297289Z"
+  },
+  {
+    "id": "window-3",
+    "name": "Display Window 3",
+    "playlist": [
+      {
+        "id": "M6",
+        "name": "Forest",
+        "type": "image",
+        "url": "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format\u0026fit=crop\u0026w=1200\u0026q=80",
+        "duration": 9
+      },
+      {
+        "id": "M3",
+        "name": "Sample Video",
+        "type": "video",
+        "url": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+        "duration": 12
+      }
+    ],
+    "updatedAt": "2026-09-13T00:00:00Z"
+  }
+]
