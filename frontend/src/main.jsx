@@ -150,9 +150,9 @@ function App() {
   return (
     <main>
       <header>
-        <div>git add .
+        <div>
           <h1>Multi-Window Media Sequencer</h1>
-          <p>Scalable layered backend · React display layer · real-time synchronized playback</p>
+          <p>Add media via URL · Manage display playlists · Synchronize playback in real time</p>
         </div>
         <div className={`status ${status === "Live" ? "live" : ""}`}>● {status}</div>
       </header>
