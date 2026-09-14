@@ -150,8 +150,7 @@ function App() {
   return (
     <main>
       <header>
-        <div>
-          <small>BACKEND INTERN ASSIGNMENT</small>
+        <div>git add .
           <h1>Multi-Window Media Sequencer</h1>
           <p>Scalable layered backend · React display layer · real-time synchronized playback</p>
         </div>
